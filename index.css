@@ -4,9 +4,13 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-
     
     }
 
 
 
+
+.invalid{
+    color: rgba(255, 0, 0);
+    transition: 0.5s;
+}
