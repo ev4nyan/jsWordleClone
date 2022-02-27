@@ -12984,13 +12984,49 @@ const guessList = document.querySelector(".guess-list");
 
 guessButton.addEventListener("click",addGuess);
 
+
+// MEMORY
+
+
+
+let greens = [];
+let yellows = [];
+let usedLetters = [];
+
+
+
+// FUNCTIONS
+
+const count = (string,want) => {
+    var count = 0;
+    for (let jeff of string) {
+        if (jeff === want) {
+            count++;
+        }
+    }
+    return count;
+}
+
+const removeAll = (array, letter) => {
+    for (var pee = 0; pee < array.length; pee++) {
+        if(array[pee] === letter) {
+            array.splice(pee, 1);
+            
+        }
+
+    }
+}
+
+
 function RNG() {
     return Math.floor(Math.random() * 2314);
   }
 
+const currentWord = arrayWords[RNG()];
+
 function addGuess(e) {
     e.preventDefault();
-
+    let playerGuess = guessInput.value;
 
     if((/^\s*$/.test(guessInput.value) !== true) && 
     (guessInput.value.length === 5) &&
@@ -13007,7 +13043,31 @@ function addGuess(e) {
 
         guessList.appendChild(guessDiv);
 
+        for (let i = 0; i < guessInput.value.length; i++){
+
+            if (currentWord.includes(guessInput.value[i])) {
+                if (usedLetters.includes(currentWord[i])) {
+                    usedLetters.push(guessInput.value[i]);
+                }
+                if(currentWord[i] === guessInput.value[i]){
+                    greens.push(guessInput.value[i])
+                }
+                else {
+                    yellows.push(guessInput.value[i])
+                }
+            }
+
+        }
+
+
+ 
+        
+        console.log(greens,yellows,usedLetters);
+
         guessInput.value = "";
+
+       
+    
 
     }
     
@@ -13030,3 +13090,8 @@ function fiveLetter(){
     
 
 
+// Game Start
+
+
+    greens = []
+    yellows = []
